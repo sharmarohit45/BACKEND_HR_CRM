@@ -21,7 +21,7 @@ public class Project {
 	    @ManyToOne
 	    @JoinColumn(name = "client_id", referencedColumnName = "clientId")
 	    private Client client;
-        @ManyToMany
+	    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	    @JoinTable(
 	            name = "projects_employees",
 	            joinColumns = @JoinColumn(name = "project_id"),

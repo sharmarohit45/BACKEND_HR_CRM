@@ -1,4 +1,6 @@
 package com.youtube.jwt.entity;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -37,6 +39,15 @@ public class Employee {
 	 private String maritial_State;
 	 private String role;
 	 private String imageName;
+	 @ManyToMany(mappedBy = "members", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	    private List<Project> projects;
+	 public List<Project> getProjects() {
+	        return projects;
+	    }
+
+	    public void setProjects(List<Project> projects) {
+	        this.projects = projects;
+	    }
 	 
 	  @Lob
 	  private byte[] imageData;

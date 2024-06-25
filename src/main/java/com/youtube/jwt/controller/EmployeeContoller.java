@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,8 +55,14 @@ public class EmployeeContoller {
                        .orElseGet(() -> ResponseEntity.notFound().build());
     }
 	@DeleteMapping("/employee/{emp_id}")
-	public ResponseEntity<Void> deleteEmployee(@PathVariable Long emp_id) {
-	    employeeService.deleteEmployeeById(emp_id);
-	    return ResponseEntity.noContent().build();  
-	}
+    public ResponseEntity<String> deleteEmployee(@PathVariable("emp_id") Long id) {
+      employeeService.deleteEmployee(id);
+      return ResponseEntity.ok("Employee deleted successfully");
+    }
+	
+	/**@PutMapping("/employee/{emp_id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long emp_id @RequestBody Employee employee) {
+        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+        return ResponseEntity.ok(updatedEmployee);
+    }**/
 }
