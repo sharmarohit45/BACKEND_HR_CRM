@@ -24,4 +24,17 @@ public class DepartmentService {
 		return departmentDao.findAll(); // Or whatever method is used in your DAO
 	}
 
+	public Department updateDepartment(Long departmentId, Department updatedDepartment) {
+		Department existingDepartment = departmentDao.findById(departmentId)
+				.orElseThrow(() -> new RuntimeException("Department not found with id: " + departmentId));
+		existingDepartment.setDepartmentName(updatedDepartment.getDepartmentName());
+		existingDepartment.setDepartmentParent(updatedDepartment.getDepartmentParent());
+
+		// Save the updated department back to the database
+		return departmentDao.save(existingDepartment);
+	}
+	public void deleteDepartment(Long id) {
+        departmentDao.deleteById(id);
+    }
+
 }

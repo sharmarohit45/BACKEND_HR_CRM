@@ -20,7 +20,9 @@ public class EmployeeService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
+    public Long getEmployeeCount() {
+        return employeeDao.count();
+    }
     public Employee saveEmployee(Employee employee) {
         String encodedPassword = passwordEncoder.encode(employee.getPassword());
         employee.setPassword(encodedPassword);
@@ -48,7 +50,7 @@ public class EmployeeService {
     public List<Employee> getEmployee() {
         return employeeDao.findAll();
     }
-    public void deleteEmployeeById(Long empId) {
+    public void deleteById(Long empId) {
     	employeeDao.deleteById(empId);
     }
 }

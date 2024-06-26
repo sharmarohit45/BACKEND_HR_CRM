@@ -26,6 +26,11 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 
+	@GetMapping("/client-count")
+	public Long getClientCount() {
+		return clientService.getClientCount();
+	}
+
 	@PostMapping("/client")
 	public ResponseEntity<Client> saveClient(@RequestParam("clientLogo") MultipartFile clientLogo,
 			@RequestParam("clientProfileImage") MultipartFile clientProfileImage, @ModelAttribute Client client) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,10 @@ public class EmployeeContoller {
 	@Autowired
     private EmployeeService employeeService;
 	
+	@GetMapping("/employee-count")
+    public Long getEmployeeCount() {
+        return employeeService.getEmployeeCount();
+    }
 	@PostMapping("/employee")
     public ResponseEntity<Employee> saveEmployee(@RequestParam("file") MultipartFile file, @ModelAttribute Employee employee) {
         try {
@@ -53,9 +58,14 @@ public class EmployeeContoller {
         return employee.map(ResponseEntity::ok)
                        .orElseGet(() -> ResponseEntity.notFound().build());
     }
-	@DeleteMapping("/employee/{emp_id}")
-	public ResponseEntity<Void> deleteEmployee(@PathVariable Long emp_id) {
-	    employeeService.deleteEmployeeById(emp_id);
-	    return ResponseEntity.noContent().build();  
-	}
+	@DeleteMapping("/employee/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        Optional<Employee> employee = employeeService.getEmployeeById(id);
+        if (employee.isPresent()) {
+            employeeService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

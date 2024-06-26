@@ -24,6 +24,10 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
     
+    @GetMapping("/project-count")
+	public Long getProjectCount() {
+		return projectService.getProjectCount();
+	}
     @PostMapping({"/createNewProject"})
     public ResponseEntity<Project> saveProjects(@RequestParam("addfile") MultipartFile addfile, @ModelAttribute Project project) {
         try {
