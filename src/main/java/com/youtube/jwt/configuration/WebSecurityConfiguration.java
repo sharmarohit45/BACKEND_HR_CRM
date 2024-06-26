@@ -46,9 +46,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 		"/employee",
                 		"/admin",
                 		"/allEmployee",
-                		"/employee/{emp_id}","/lead-count","/lead","/lead/{id}","/deal-count","/deals","/deals/{id}","/employee-count","/employee/{emp_id}",
-                		"/createNewProject","/shift","/client-count","/allclient","/admin/data","/project-count","/getallProject","/shift/data",
-                		"/designations","/departments/{departmentId}","/departments","/attendence","/client/{clientId}","/stickynote","/stickynote/{stickyNoteId}","{/loginDetails}",
+            		"/employee/{emp_id}","/lead","/lead/{id}","/deals","/deals/{id}","/employee/{emp_id}",
+                		"/createNewProject","/shift","/allclient","/admin/data","/getallProject","/shift/data",
+                		"/designations","/departments","/attendence","/client/{clientId}","/stickynote","/stickynote/{stickyNoteId}","{/loginDetails}",
                 		"/contract","/notice","/product","/product/{productId}","/proposals").permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()

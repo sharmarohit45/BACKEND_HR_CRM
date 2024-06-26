@@ -1,6 +1,9 @@
 package com.youtube.jwt.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 @Entity
@@ -21,12 +24,13 @@ public class Project {
 	    @ManyToOne
 	    @JoinColumn(name = "client_id", referencedColumnName = "clientId")
 	    private Client client;
-        @ManyToMany
+	    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	    @JoinTable(
 	            name = "projects_employees",
 	            joinColumns = @JoinColumn(name = "project_id"),
 	            inverseJoinColumns = @JoinColumn(name = "employee_id")
 	    )
+	    @JsonBackReference
 	    private List<Employee> members;
 	    private String projectSummery;
 	    private String projectNotes;

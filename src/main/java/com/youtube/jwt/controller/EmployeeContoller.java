@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,14 +59,17 @@ public class EmployeeContoller {
         return employee.map(ResponseEntity::ok)
                        .orElseGet(() -> ResponseEntity.notFound().build());
     }
-	@DeleteMapping("/employee/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
-        Optional<Employee> employee = employeeService.getEmployeeById(id);
-        if (employee.isPresent()) {
-            employeeService.deleteById(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+
+	@DeleteMapping("/employee/{emp_id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("emp_id") Long id) {
+      employeeService.deleteEmployee(id);
+      return ResponseEntity.ok("Employee deleted successfully");
     }
+	
+	/**@PutMapping("/employee/{emp_id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long emp_id @RequestBody Employee employee) {
+        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+        return ResponseEntity.ok(updatedEmployee);
+    }**/
+
 }
