@@ -1,6 +1,9 @@
 package com.youtube.jwt.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 @Entity
@@ -27,6 +30,7 @@ public class Project {
 	            joinColumns = @JoinColumn(name = "project_id"),
 	            inverseJoinColumns = @JoinColumn(name = "employee_id")
 	    )
+	    @JsonBackReference
 	    private List<Employee> members;
 	    private String projectSummery;
 	    private String projectNotes;
