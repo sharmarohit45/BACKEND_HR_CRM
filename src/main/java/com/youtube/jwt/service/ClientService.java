@@ -22,7 +22,9 @@ public class ClientService {
     
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    public Long getClientCount() {
+        return clientDao.count();
+    }
     public Client saveClient(Client client) {
     	String encodedPassword = passwordEncoder.encode(client.getPassword());
     	client.setPassword(encodedPassword);

@@ -46,7 +46,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 		"/employee",
                 		"/admin",
                 		"/allEmployee",
-                		"/employee/{emp_id}","/lead","/lead/{id}","/deals","/deals/{id}","/employee/{emp_id}",
+            		"/employee/{emp_id}","/lead","/lead/{id}","/deals","/deals/{id}","/employee/{emp_id}",
                 		"/createNewProject","/shift","/allclient","/admin/data","/getallProject","/shift/data",
                 		"/designations","/departments","/attendence","/client/{clientId}","/stickynote","/stickynote/{stickyNoteId}","{/loginDetails}",
                 		"/contract","/notice","/product","/product/{productId}","/proposals").permitAll()

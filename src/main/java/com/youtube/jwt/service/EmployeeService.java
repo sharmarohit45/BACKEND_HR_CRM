@@ -32,7 +32,9 @@ public class EmployeeService {
     @Autowired
     private ProjectDao projectRepository;
 
-
+    public Long getEmployeeCount() {
+        return employeeDao.count();
+    }
     public Employee saveEmployee(Employee employee) {
         String encodedPassword = passwordEncoder.encode(employee.getPassword());
         employee.setPassword(encodedPassword);
@@ -60,6 +62,7 @@ public class EmployeeService {
     public List<Employee> getEmployee() {
         return employeeDao.findAll();
     }
+
     
     @Transactional
     public void deleteEmployee(Long employeeId) {
@@ -81,6 +84,7 @@ public class EmployeeService {
             // Now delete the employee
             employeeDao.delete(employee);
         } 
+
     }
     @Transactional
     public Employee updateEmployee(Long employeeId, Employee updatedEmployee) {

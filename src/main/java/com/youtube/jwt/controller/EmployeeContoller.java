@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,10 @@ public class EmployeeContoller {
 	@Autowired
     private EmployeeService employeeService;
 	
+	@GetMapping("/employee-count")
+    public Long getEmployeeCount() {
+        return employeeService.getEmployeeCount();
+    }
 	@PostMapping("/employee")
     public ResponseEntity<Employee> saveEmployee(@RequestParam("file") MultipartFile file, @ModelAttribute Employee employee) {
         try {
@@ -54,6 +59,7 @@ public class EmployeeContoller {
         return employee.map(ResponseEntity::ok)
                        .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
 	@DeleteMapping("/employee/{emp_id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable("emp_id") Long id) {
       employeeService.deleteEmployee(id);
@@ -65,4 +71,5 @@ public class EmployeeContoller {
         Employee updatedEmployee = employeeService.updateEmployee(id, employee);
         return ResponseEntity.ok(updatedEmployee);
     }**/
+
 }

@@ -27,6 +27,9 @@ public class ProjectService {
     @Autowired
     private ClientDao clientRepository;
 
+    public Long getProjectCount() {
+        return projectRepository.count();
+    }
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }

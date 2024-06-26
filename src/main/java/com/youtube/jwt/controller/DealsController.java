@@ -20,6 +20,10 @@ import com.youtube.jwt.service.DealsService;
 public class DealsController {
 	@Autowired
 	private DealsService dealsService;
+	@GetMapping("/deal-count")
+	public Long getDealCount() {
+		return dealsService.getDealCount();
+	}
 	@PostMapping("/deals")
     public ResponseEntity<Deals> saveDeals(@RequestBody Deals deals) {
         Deals savedDeals = dealsService.saveDeals(deals);

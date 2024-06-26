@@ -17,6 +17,10 @@ public class DealsService {
     private DealsDao dealsDao;
     @Autowired
     private LeadDao leadDao;
+    
+    public Long getDealCount() {
+        return dealsDao.count();
+    }
     public Deals saveDeals(Deals deals) {
     	Lead lead = leadDao.findById(deals.getLeadContacts())
                 .orElseThrow(() -> new RuntimeException("Lead not found"));

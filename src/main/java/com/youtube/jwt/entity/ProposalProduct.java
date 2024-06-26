@@ -1,5 +1,6 @@
 package com.youtube.jwt.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,25 +19,32 @@ public class ProposalProduct {
     private String unitPrice;
     private String tax;
     private String amount;
-    @ManyToOne
+    public byte[] getFileData() {
+		return fileData;
+	}
+
+
+
+	public void setFileData(byte[] fileData) {
+		this.fileData = fileData;
+	}
+
+	@ManyToOne
     @JoinColumn(name = "proposal_id")
     private Proposal proposal;
     
     private String fileName;
-	  private String fileData;
+    
+     @Lob
+     @Column(name = "file_data", columnDefinition = "BLOB")
+	 private byte[] fileData;
 
 
     public String getFileName() {
 		return fileName;
 	}
 
-	public String getFileData() {
-		return fileData;
-	}
-
-	public void setFileData(String fileData) {
-		this.fileData = fileData;
-	}
+	
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
