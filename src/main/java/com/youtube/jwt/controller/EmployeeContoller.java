@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.youtube.jwt.entity.Employee;
+import com.youtube.jwt.exception.EntityNotFoundException;
 import com.youtube.jwt.service.EmployeeService;
 
 
@@ -66,10 +67,14 @@ public class EmployeeContoller {
       return ResponseEntity.ok("Employee deleted successfully");
     }
 	
-	/**@PutMapping("/employee/{emp_id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long emp_id @RequestBody Employee employee) {
-        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
-        return ResponseEntity.ok(updatedEmployee);
-    }**/
+	@PutMapping("/employee/{emp_id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long employeeId, @RequestBody Employee updatedEmployee) {
+        try {
+            Employee updated = employeeService.updateEmployee(employeeId, updatedEmployee);
+            return ResponseEntity.ok(updated);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
