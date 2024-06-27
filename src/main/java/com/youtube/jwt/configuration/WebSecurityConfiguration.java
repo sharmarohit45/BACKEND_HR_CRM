@@ -21,53 +21,48 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	@Autowired
+	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private UserDetailsService jwtService;
+	@Autowired
+	private UserDetailsService jwtService;
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors();
-        httpSecurity.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate",
-                		"/registerNewUser",
-                		"/client",
-                		"/employee",
-                		"/admin",
-                		"/allEmployee",
-            		"/employee/{emp_id}","/lead","/lead/{id}","/deals","/deals/{id}","/employee/{emp_id}",
-                		"/createNewProject","/shift","/allclient","/admin/data","/getallProject","/shift/data",
-                		"/designations","/departments","/attendence","/client/{clientId}","/stickynote","/stickynote/{stickyNoteId}","{/loginDetails}",
-                		"/contract","/notice","/product","/product/{productId}","/proposals").permitAll()
-                .antMatchers(HttpHeaders.ALLOW).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        ;
+	@Override
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.cors();
+		httpSecurity.csrf().disable().authorizeRequests()
+				.antMatchers("/authenticate", "/registerNewUser", "/client", "/client-count", "/employee", "/admin",
+						"/allEmployee", "/employee-count", "/employee/{emp_id}", "/lead", "/lead/{id}","/lead-count", "/deals",
+						"/deals/{id}","/deal-count", "/employee/{emp_id}", "/createNewProject", "/shift", "/allclient", "/admin/data",
+						"/getallProject","/project-count", "/shift/data", "/designations", "/departments", "/attendence",
+						"/client/{clientId}", "/stickynote", "/stickynote/{stickyNoteId}", "{/loginDetails}",
+						"/contract", "/notice", "/product", "/product/{productId}", "/proposals",
+						"/clockAttendance/clock-in",
+						"/clockAttendance/clock-out/{id}",
+						"/holiday","/holiday/{id}","/employee/{employeeId}")
+				.permitAll().antMatchers(HttpHeaders.ALLOW).permitAll().anyRequest().authenticated().and()
+				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
+		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+	}
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(jwtService).passwordEncoder(passwordEncoder());
-    }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+		authenticationManagerBuilder.userDetailsService(jwtService).passwordEncoder(passwordEncoder());
+	}
 }
