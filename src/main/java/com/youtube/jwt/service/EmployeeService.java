@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.youtube.jwt.dao.ClockAttendenceDao;
 import com.youtube.jwt.dao.EmployeeDao;
 import com.youtube.jwt.dao.ProjectDao;
 import com.youtube.jwt.dao.ShiftDao;
+import com.youtube.jwt.entity.ClockAttendence;
 import com.youtube.jwt.entity.Employee;
 import com.youtube.jwt.entity.Project;
 import com.youtube.jwt.entity.Shift;
@@ -31,6 +33,8 @@ public class EmployeeService {
     private ShiftDao shiftRepository;
     @Autowired
     private ProjectDao projectRepository;
+    @Autowired
+    private ClockAttendenceDao clockAttendenceDao;
 
     public Long getEmployeeCount() {
         return employeeDao.count();
@@ -80,7 +84,10 @@ public class EmployeeService {
                 project.getMembers().remove(employee);
                 projectRepository.save(project);
             }
-            
+            List<ClockAttendence> clockAttendence = clockAttendenceDao.findByEmployee(employee);
+            for (ClockAttendence clockAtt : clockAttendence) {
+            	clockAttendenceDao.delete(clockAtt);
+            }
             // Now delete the employee
             employeeDao.delete(employee);
         } 

@@ -24,8 +24,23 @@ public class ClockAttendanceController {
 	@PostMapping("/clockAttendance/clock-in")
 	public ResponseEntity<ClockAttendence> createClockAttendence(@RequestBody ClockAttendence clockAttendence) {
         ClockAttendence createdClockAttendence = clockAttendenceService.createClockAttendence(clockAttendence);
-        return new ResponseEntity<>(createdClockAttendence, HttpStatus.CREATED);
+        return ResponseEntity.ok(createdClockAttendence);
     }
+	
+	@PutMapping("/clockAttendance/clock-out/{employeeId}/{attendanceDate}")
+    public ResponseEntity<ClockAttendence> updateClockOutTime(
+            @PathVariable Long employeeId,
+            @PathVariable String attendanceDate,
+            @RequestBody ClockAttendence clockAttendence) {
+        ClockAttendence updatedClockAttendence = clockAttendenceService.updateClockOutTime(employeeId, attendanceDate, clockAttendence);
+        return ResponseEntity.ok(updatedClockAttendence);
+    }
+	
+	/**@PutMapping("/clockAttendance/clock-out/{employeeId}")
+    public ResponseEntity<ClockAttendence> updateClockOutTime(@PathVariable Long employeeId, @RequestBody ClockAttendence clockAttendence) {
+        ClockAttendence updatedClockAttendence = clockAttendenceService.updateClockOutTime(employeeId, clockAttendence);
+        return ResponseEntity.ok(updatedClockAttendence);
+    }**/
 
 	@GetMapping("/clockAttendance/clock-in")
     public ResponseEntity<List<ClockAttendence>> getAllClockAttendences() {
