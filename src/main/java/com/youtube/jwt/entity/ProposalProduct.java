@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class ProposalProduct {
 	@Id
@@ -22,15 +25,12 @@ public class ProposalProduct {
     public byte[] getFileData() {
 		return fileData;
 	}
-
-
-
 	public void setFileData(byte[] fileData) {
 		this.fileData = fileData;
 	}
-
 	@ManyToOne
     @JoinColumn(name = "proposal_id")
+	@JsonIgnore
     private Proposal proposal;
     
     private String fileName;
@@ -58,15 +58,12 @@ public class ProposalProduct {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public Proposal getProposal() {
 		return proposal;
 	}
-
 	public void setProposal(Proposal proposal) {
 		this.proposal = proposal;
 	}
-
 	// Getters and Setters
     public String getDescription() {
         return description;

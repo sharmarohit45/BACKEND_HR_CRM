@@ -68,13 +68,25 @@ public class EmployeeContoller {
     }
 	
 	@PutMapping("/employee/{emp_id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long employeeId, @RequestBody Employee updatedEmployee) {
-        try {
-            Employee updated = employeeService.updateEmployee(employeeId, updatedEmployee);
-            return ResponseEntity.ok(updated);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+	public ResponseEntity<Employee> updateEmployee(
+	        @PathVariable Long emp_id,
+	        @RequestParam(value = "file", required = false) MultipartFile file,
+	        @ModelAttribute Employee updatedEmployee) {
+	    try {
+	        if (file != null && !file.isEmpty()) {
+	            byte[] imageData = file.getBytes();
+	            updatedEmployee.setImageData(imageData);
+	            updatedEmployee.setImageName(file.getOriginalFilename());
+	        }
+	        Employee updated = employeeService.updateEmployee(emp_id, updatedEmployee);
+	        return ResponseEntity.ok(updated);
+	    } catch (EntityNotFoundException e) {
+	        return ResponseEntity.notFound().build();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    }
+	}
+
 
 }

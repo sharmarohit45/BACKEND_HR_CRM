@@ -99,46 +99,104 @@ public class EmployeeService {
 
         if (employeeOptional.isPresent()) {
             Employee existingEmployee = employeeOptional.get();
-            
-            // Update fields of the existing employee with values from updatedEmployee
-            existingEmployee.setEmployeeIdentity(updatedEmployee.getEmployeeIdentity());
-            existingEmployee.setSalutation(updatedEmployee.getSalutation());
-            existingEmployee.setEmpName(updatedEmployee.getEmpName());
-            existingEmployee.setEmail(updatedEmployee.getEmail());
-            existingEmployee.setPassword(updatedEmployee.getPassword());
-            existingEmployee.setDesignation(updatedEmployee.getDesignation());
-            existingEmployee.setDepartment(updatedEmployee.getDepartment());
-            existingEmployee.setCountry(updatedEmployee.getCountry());
-            existingEmployee.setMobileNo(updatedEmployee.getMobileNo());
-            existingEmployee.setGender(updatedEmployee.getGender());
-            existingEmployee.setJoiningDate(updatedEmployee.getJoiningDate());
-            existingEmployee.setDateOfBirth(updatedEmployee.getDateOfBirth());
-            existingEmployee.setReportingTo(updatedEmployee.getReportingTo());
-            existingEmployee.setLanguage(updatedEmployee.getLanguage());
-            existingEmployee.setEmp_User_Name(updatedEmployee.getEmp_User_Name());
-            existingEmployee.setAddress(updatedEmployee.getAddress());
-            existingEmployee.setAbout(updatedEmployee.getAbout());
-            existingEmployee.setLogin_Allowed(updatedEmployee.getLogin_Allowed());
-            existingEmployee.setEmail_Notification(updatedEmployee.getEmail_Notification());
-            existingEmployee.setHourly_Rate(updatedEmployee.getHourly_Rate());
-            existingEmployee.setSlack_Member_Id(updatedEmployee.getSlack_Member_Id());
-            existingEmployee.setSkills(updatedEmployee.getSkills());
-            existingEmployee.setProvision_End_Date(updatedEmployee.getProvision_End_Date());
-            existingEmployee.setNotice_Period_Date(updatedEmployee.getNotice_Period_Date());
-            existingEmployee.setNotice_Period_Enddate(updatedEmployee.getNotice_Period_Enddate());
-            existingEmployee.setEmployement_Type(updatedEmployee.getEmployement_Type());
-            existingEmployee.setMaritial_State(updatedEmployee.getMaritial_State());
-            existingEmployee.setRole(updatedEmployee.getRole());
-            existingEmployee.setImageName(updatedEmployee.getImageName());
-            existingEmployee.setImageData(updatedEmployee.getImageData());
 
-            // Save the updated employee
+            if (updatedEmployee.getEmployeeIdentity() != null) {
+                existingEmployee.setEmployeeIdentity(updatedEmployee.getEmployeeIdentity());
+            }
+            if (updatedEmployee.getSalutation() != null) {
+                existingEmployee.setSalutation(updatedEmployee.getSalutation());
+            }
+            if (updatedEmployee.getEmpName() != null) {
+                existingEmployee.setEmpName(updatedEmployee.getEmpName());
+            }
+            if (updatedEmployee.getEmail() != null) {
+                existingEmployee.setEmail(updatedEmployee.getEmail());
+            }
+            if (updatedEmployee.getPassword() != null) {
+                existingEmployee.setPassword(passwordEncoder.encode(updatedEmployee.getPassword()));
+            }
+            if (updatedEmployee.getDesignation() != null) {
+                existingEmployee.setDesignation(updatedEmployee.getDesignation());
+            }
+            if (updatedEmployee.getDepartment() != null) {
+                existingEmployee.setDepartment(updatedEmployee.getDepartment());
+            }
+            if (updatedEmployee.getCountry() != null) {
+                existingEmployee.setCountry(updatedEmployee.getCountry());
+            }
+            if (updatedEmployee.getMobileNo() != null) {
+                existingEmployee.setMobileNo(updatedEmployee.getMobileNo());
+            }
+            if (updatedEmployee.getGender() != null) {
+                existingEmployee.setGender(updatedEmployee.getGender());
+            }
+            if (updatedEmployee.getJoiningDate() != null) {
+                existingEmployee.setJoiningDate(updatedEmployee.getJoiningDate());
+            }
+            if (updatedEmployee.getDateOfBirth() != null) {
+                existingEmployee.setDateOfBirth(updatedEmployee.getDateOfBirth());
+            }
+            if (updatedEmployee.getReportingTo() != null) {
+                existingEmployee.setReportingTo(updatedEmployee.getReportingTo());
+            }
+            if (updatedEmployee.getLanguage() != null) {
+                existingEmployee.setLanguage(updatedEmployee.getLanguage());
+            }
+            if (updatedEmployee.getEmp_User_Name() != null) {
+                existingEmployee.setEmp_User_Name(updatedEmployee.getEmp_User_Name());
+            }
+            if (updatedEmployee.getAddress() != null) {
+                existingEmployee.setAddress(updatedEmployee.getAddress());
+            }
+            if (updatedEmployee.getAbout() != null) {
+                existingEmployee.setAbout(updatedEmployee.getAbout());
+            }
+            if (updatedEmployee.getLogin_Allowed() != null) {
+                existingEmployee.setLogin_Allowed(updatedEmployee.getLogin_Allowed());
+            }
+            if (updatedEmployee.getEmail_Notification() != null) {
+                existingEmployee.setEmail_Notification(updatedEmployee.getEmail_Notification());
+            }
+            if (updatedEmployee.getHourly_Rate() != null) {
+                existingEmployee.setHourly_Rate(updatedEmployee.getHourly_Rate());
+            }
+            if (updatedEmployee.getSlack_Member_Id() != null) {
+                existingEmployee.setSlack_Member_Id(updatedEmployee.getSlack_Member_Id());
+            }
+            if (updatedEmployee.getSkills() != null) {
+                existingEmployee.setSkills(updatedEmployee.getSkills());
+            }
+            if (updatedEmployee.getProvision_End_Date() != null) {
+                existingEmployee.setProvision_End_Date(updatedEmployee.getProvision_End_Date());
+            }
+            if (updatedEmployee.getNotice_Period_Date() != null) {
+                existingEmployee.setNotice_Period_Date(updatedEmployee.getNotice_Period_Date());
+            }
+            if (updatedEmployee.getNotice_Period_Enddate() != null) {
+                existingEmployee.setNotice_Period_Enddate(updatedEmployee.getNotice_Period_Enddate());
+            }
+            if (updatedEmployee.getEmployement_Type() != null) {
+                existingEmployee.setEmployement_Type(updatedEmployee.getEmployement_Type());
+            }
+            if (updatedEmployee.getMaritial_State() != null) {
+                existingEmployee.setMaritial_State(updatedEmployee.getMaritial_State());
+            }
+            if (updatedEmployee.getRole() != null) {
+                existingEmployee.setRole(updatedEmployee.getRole());
+            }
+            if (updatedEmployee.getImageName() != null) {
+                existingEmployee.setImageName(updatedEmployee.getImageName());
+            }
+            if (updatedEmployee.getImageData() != null) {
+                existingEmployee.setImageData(updatedEmployee.getImageData());
+            }
+
             return employeeDao.save(existingEmployee);
         } else {
-            // Handle the case when the employee is not found
             throw new EntityNotFoundException("Employee not found with id: " + employeeId);
         }
     }
+
     
 
 }
