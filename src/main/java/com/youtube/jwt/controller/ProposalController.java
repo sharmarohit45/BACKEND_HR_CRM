@@ -34,6 +34,19 @@ public class ProposalController {
 	 private static final Logger logger = LoggerFactory.getLogger(ProposalController.class);
 	 
 	 @PostMapping("/proposals")
+	    public Proposal handleProposal(@RequestBody Proposal proposal) {
+	        List<ProposalProduct> proposalProducts = proposal.getProposalProducts();
+	        
+	        // Ensure the proposal reference is set on each product
+	        for (ProposalProduct product : proposalProducts) {
+	            product.setProposal(proposal);
+	        }
+
+	        return proposalService.saveProposal(proposal);
+	    }
+
+	 
+	/** @PostMapping("/proposals")
 	 public Proposal handleProposal(@RequestBody Proposal proposal) {
 	        // Process the proposal object
 		 List<ProposalProduct> proposalProducts = new ArrayList<>();
@@ -55,7 +68,7 @@ public class ProposalController {
 
 	        
 	        return proposalService.saveProposal(proposal);
-	    }
+	    }**/
 
 	   
 	/**@PostMapping("/proposals")

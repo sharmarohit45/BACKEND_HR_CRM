@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Proposal {
 	
@@ -35,6 +38,17 @@ public class Proposal {
 	    private boolean signatureApproval;
 	    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<ProposalProduct> proposalProducts = new ArrayList<>();
+	    
+	    public void addProposalProduct(ProposalProduct proposalProduct) {
+	        proposalProducts.add(proposalProduct);
+	        proposalProduct.setProposal(this);
+	    }
+
+	    public void removeProposalProduct(ProposalProduct proposalProduct) {
+	        proposalProducts.remove(proposalProduct);
+	        proposalProduct.setProposal(null);
+	    }
+	   
 		public Long getProposalId() {
 			return proposalId;
 		}
@@ -101,5 +115,6 @@ public class Proposal {
 		public void setProposalProducts(List<ProposalProduct> proposalProducts) {
 			this.proposalProducts = proposalProducts;
 		}
+	    
 		
 }
