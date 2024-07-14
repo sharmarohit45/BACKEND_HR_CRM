@@ -35,6 +35,8 @@ public class Proposal {
 	    private String currency;
 	    private String calculateTax;
 	    private String description;
+	    private String total;
+	    private String date;
 	    private boolean signatureApproval;
 	    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<ProposalProduct> proposalProducts = new ArrayList<>();
@@ -114,6 +116,22 @@ public class Proposal {
 		}
 		public void setProposalProducts(List<ProposalProduct> proposalProducts) {
 			this.proposalProducts = proposalProducts;
+		}
+
+		public String getTotal() {
+			return total;
+		}
+
+		public void setTotal(String total) {
+			this.total = total;
+		}
+
+		public String getDate() {
+			return date;
+		}
+
+		public void setDate(String date) {
+			this.date = date;
 		}
 	    
 		
