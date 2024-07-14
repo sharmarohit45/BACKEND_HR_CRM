@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.youtube.jwt.entity.HoliDayDateOcassion;
 import com.youtube.jwt.entity.Holiday;
+import com.youtube.jwt.entity.ProposalProduct;
 import com.youtube.jwt.service.HolidayService;
 
 @RestController
@@ -23,9 +25,14 @@ public class HolidayController {
 	private HolidayService holidayService;
 
 	@PostMapping("/holiday")
-	public ResponseEntity<Holiday> createHoliday(@RequestBody Holiday Holiday) {
-		Holiday createdHoliday = holidayService.createHoliday(Holiday);
-		return new ResponseEntity<>(createdHoliday, HttpStatus.CREATED);
+	public Holiday createHoliday(@RequestBody Holiday Holiday) {
+		  List<HoliDayDateOcassion> holiDayDateOcassion = Holiday.getHoliDayDateOcassion();
+	        
+	        // Ensure the proposal reference is set on each product
+	        for (HoliDayDateOcassion dateOcassion : holiDayDateOcassion) {
+	        	dateOcassion.setHoliday(Holiday);
+	        }
+	        return holidayService.createHoliday(Holiday);
 	}
 
 	@GetMapping("/holiday")

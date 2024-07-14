@@ -1,44 +1,42 @@
 package com.youtube.jwt.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Holiday {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long holidayId;
-
-	private String date;
-	private String occasion;
 	private String department;
 	private String designation;
 	private String employmentType;
+	 @OneToMany(mappedBy = "holiday", cascade = CascadeType.ALL, orphanRemoval = true)
+	 private List<HoliDayDateOcassion> holiDayDateOcassion = new ArrayList<>();
 	public Long getHolidayId() {
 		return holidayId;
 	}
 	public void setHolidayId(Long holidayId) {
 		this.holidayId = holidayId;
 	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getOccasion() {
-		return occasion;
-	}
-	public void setOccasion(String occasion) {
-		this.occasion = occasion;
-	}
 	public String getDepartment() {
 		return department;
 	}
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+	public List<HoliDayDateOcassion> getHoliDayDateOcassion() {
+		return holiDayDateOcassion;
+	}
+	public void setHoliDayDateOcassion(List<HoliDayDateOcassion> holiDayDateOcassion) {
+		this.holiDayDateOcassion = holiDayDateOcassion;
 	}
 	public String getDesignation() {
 		return designation;
