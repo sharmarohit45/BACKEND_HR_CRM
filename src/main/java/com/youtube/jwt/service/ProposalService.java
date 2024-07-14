@@ -45,5 +45,9 @@ public class ProposalService {
     public List<Proposal> getAllProjects() {
         return proposalRepository.findAll();
     }
+    public Proposal getProposalById(Long proposalId) {
+        return proposalRepository.findById(proposalId)
+                .orElseThrow(() -> new RuntimeException("Proposal not found"));
+    }
 
 }
