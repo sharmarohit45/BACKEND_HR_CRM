@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +46,11 @@ public class ProposalController {
 
 	        return proposalService.saveProposal(proposal);
 	    }
-
+	 @GetMapping("/proposals/{proposalId}")
+	    public ResponseEntity<Proposal> getProposalById(@PathVariable Long proposalId) {
+	        Proposal proposal = proposalService.getProposalById(proposalId);
+	        return ResponseEntity.ok(proposal);
+	    }
 	 
 	/** @PostMapping("/proposals")
 	 public Proposal handleProposal(@RequestBody Proposal proposal) {
