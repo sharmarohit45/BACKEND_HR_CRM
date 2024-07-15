@@ -37,6 +37,7 @@ public class Proposal {
 	    private String description;
 	    private String total;
 	    private String date;
+	    private String recipientNote;
 	    private boolean signatureApproval;
 	    @OneToMany(mappedBy = "proposal", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<ProposalProduct> proposalProducts = new ArrayList<>();
@@ -133,6 +134,14 @@ public class Proposal {
 		public void setDate(String date) {
 			this.date = date;
 		}
-	    
+
+		public String getRecipientNote() {
+			return recipientNote;
+		}
+
+		public void setRecipientNote(String recipientNote) {
+			this.recipientNote = recipientNote;
+		}
+
 		
 }
