@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/contract", "/notice", "/product", "/product/{productId}", "/proposals",
 						"/clockAttendance/clock-in",
 						"/clockAttendance/clock-out/{id}",
-						"/holiday","/holiday/{id}","/employee/{employeeId}","/clockAttendance/clock-out/{employeeId}/{attendanceDate}","/proposals/{proposalId}")
+						"/holiday","/holiday/{id}","/employee/{employeeId}","/clockAttendance/clock-out/{employeeId}/{attendanceDate}","/admin/{id}")
 				.permitAll().antMatchers(HttpHeaders.ALLOW).permitAll().anyRequest().authenticated().and()
 				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
