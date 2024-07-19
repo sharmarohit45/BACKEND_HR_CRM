@@ -18,6 +18,7 @@ public class Holiday {
 	private String department;
 	private String designation;
 	private String employmentType;
+	private String holidayDay;
 	 @OneToMany(mappedBy = "holiday", cascade = CascadeType.ALL, orphanRemoval = true)
 	 private List<HoliDayDateOcassion> holiDayDateOcassion = new ArrayList<>();
 	public Long getHolidayId() {
@@ -50,5 +51,12 @@ public class Holiday {
 	public void setEmploymentType(String employmentType) {
 		this.employmentType = employmentType;
 	}
+	public String getHolidayDay() {
+		return holidayDay;
+	}
+	public void setHolidayDay(String holidayDay) {
+		this.holidayDay = holidayDay;
+	}
+	
 	
 }
