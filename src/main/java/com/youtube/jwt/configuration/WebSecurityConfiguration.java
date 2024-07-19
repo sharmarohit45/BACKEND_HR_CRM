@@ -44,11 +44,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 						"/allEmployee", "/employee-count", "/employee/{emp_id}", "/lead", "/lead/{id}","/lead-count", "/deals",
 						"/deals/{id}","/deal-count", "/employee/{emp_id}", "/createNewProject", "/shift", "/allclient", "/admin/data",
 						"/getallProject","/project-count", "/shift/data", "/designations", "/departments", "/attendence",
-						"/client/{clientId}", "/stickynote", "/stickynote/{stickyNoteId}", "{/loginDetails}",
-						"/contract", "/notice", "/product", "/product/{productId}", "/proposals",
-						"/clockAttendance/clock-in",
-						"/clockAttendance/clock-out/{id}",
-						"/holiday","/holiday/{id}","/employee/{employeeId}","/clockAttendance/clock-out/{employeeId}/{attendanceDate}","/admin/{id}")
+						"/client/{clientId}", "/stickynote", "/stickynote/{stickyNoteId}", "{/loginDetails}","/designations/{id}","/accounts/{accountID}",
+						"/contract", "/notice", "/product", "/product/{productId}", "/proposals","/proposals/{proposalId}",
+						"/clockAttendance/clock-in","saveEvent","/events","/createTask","/task","/leaves","/leaves/{id}",
+						"/clockAttendance/clock-out/{id}","/account","/account-data","/company","/award/{id}","/award","/appericiation","/appericiation/{id}",
+						"/holiday","/holiday/{id}","/employee/{employeeId}","/clockAttendance/clock-out/{employeeId}/{attendanceDate}","/admin/{id}","/template")
 				.permitAll().antMatchers(HttpHeaders.ALLOW).permitAll().anyRequest().authenticated().and()
 				.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
